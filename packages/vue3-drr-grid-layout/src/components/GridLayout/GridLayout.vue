@@ -107,6 +107,10 @@ const props = defineProps({
     default: true,
     type: Boolean
   },
+  isResizableRatio: {
+    default: false,
+    type: Boolean
+  },
   layout: {
     required: true,
     type: Array as PropType<Layout>,
@@ -181,7 +185,7 @@ provide(emitterKey, emitter)
 
 // options
 const layoutItemRequired = { h: 0, i: -1, w: 0, x: 0, y: 0 }
-const layoutItemOptionalKeys = ['minW', 'minH', 'maxW', 'maxH', 'moved', 'static', 'isDraggable', 'isResizable']
+const layoutItemOptionalKeys = ['minW', 'minH', 'maxW', 'maxH', 'moved', 'static', 'isDraggable', 'isResizable','isResizableRatio']
 
 //data
 const erd = ref(elementResizeDetectorMaker({ callOnAdd: false, strategy: 'scroll' }))
@@ -204,6 +208,7 @@ const gridItemProps = computed(() => ({
   containerWidth: width.value,
   isDraggable: props.isDraggable,
   isResizable: props.isResizable,
+  isResizableRatio: props.isResizableRatio,
   lastBreakpoint: lastBreakpoint.value,
   margin: props.margin,
   maxRows: props.maxRows,

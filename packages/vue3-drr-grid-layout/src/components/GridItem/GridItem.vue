@@ -62,6 +62,10 @@ const props = defineProps({
     required: true,
     type: Boolean
   },
+  isResizableRatio: {
+    required: false,
+    type: Boolean
+  },
   lastBreakpoint: {
     required: true,
     type: String as PropType<BreakpointsKeys>
@@ -466,7 +470,13 @@ const tryMakeResizable = (): void => {
         min: { height: minimum.height, width: minimum.width }
       }
     }
-
+    if (props.isResizableRatio) {
+      opts["modifiers"] = [
+        interact.modifiers.aspectRatio({
+          ratio: "preserve"
+        })
+      ]
+    }
     interactObj.value.resizable(opts)
 
     if (!resizeEventSet.value) {
